@@ -18,14 +18,6 @@ def place(board):
     else:
         return(board)
 
-def initiate():
-    global gameboard
-    global stop
-    gameboard = [[0 for x in range(4)] for y in range(4)]
-    stop = 0
-    gameboard = place(gameboard)
-    gameboard = place(gameboard)
-
 sekvence1 = [[(1/32),(1/64),(1/128),(1/256)],
             [(1/16),(1/8),(1/4),(1/2)],
             [8,4,2,1],
@@ -149,23 +141,6 @@ moveOptions = {0 : up,
            3 : left,
            }
 
-'''def hodnoceni(board):
-    score = 0
-    for i in range(4):
-        for j in range(4):
-            score += (4*i - 4*j)*pow(2,board[i][j])
-            if i > 0:
-                score -= pow(1.5,abs(board[i][j]-board[i-1][j]))
-            if j > 0:
-                score -= pow(1.5,abs(board[i][j]-board[j-1][j]))
-            if i < 3:
-                score -= pow(1.5,abs(board[i][j]-board[i+1][j]))
-            if j < 3:
-                score -= pow(1.5,abs(board[i][j]-board[j+1][j]))
-            if board[i][j] == 0:
-                score *= 2
-    return(score)'''
-
 def hodnoceni(board):
     score1 = 0
     score2 = 0
@@ -186,29 +161,6 @@ def hodnoceni(board):
             score7 += pow(2,board[i][j])*sekvence7[i][j]
             score8 += pow(2,board[i][j])*sekvence8[i][j]
     return(score1)
-
-'''def hodnoceni(board):
-    score = 0
-    highest = 0
-    for i in range(4):
-        for j in range(4):
-            if board[i][j] == 0:
-                score += 4096
-            if i > 0:
-                score -= (pow(2,board[i][j])+pow(2,board[i-1][j]))*10
-            if j > 0:
-                score -= (pow(2,board[i][j])+pow(2,board[i][j-1]))*10
-            if i < 3:
-                score -= (pow(2,board[i][j])+pow(2,board[i+1][j]))*10
-            if j < 3:
-                score -= (pow(2,board[i][j])+pow(2,board[i][j+1]))*10
-            if i in [1,2] and j in [1,2]:
-                score -= pow(2,board[i][j])*2*10
-            else:
-                score -= pow(2,board[i][j])*10
-            highest = max(highest, board[i][j])
-    score *= highest
-    return(score)'''
 
 def minmax(board, turn, depth, alfa, beta):
     global topboard
@@ -336,7 +288,6 @@ for number in gameboard:
     print(number)
 print("")
 
-initiate()
 while(stop == 0):
     topscore = 0
     topboard = [[0 for x in range(4)] for y in range(4)]

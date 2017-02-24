@@ -52,11 +52,6 @@ for i in range(4):
     for j in range(4):
         sekvence8[i][j] = sekvence2[(3-i)][(3-j)]
 
-for number in sekvence1:
-    print(number)
-for number in sekvence2:
-    print(number)
-
 listRight = []
 listRightScores = []
 listLeft = []
@@ -211,12 +206,9 @@ def expmax(board, turn, depth):
                         heur += (expmax(testBoard, 0, depth-1)) * 0.1 * (1/nuly)
             return(heur)
     else:
-        '''for i in range(4):'''
         for k in range(4):
             for l in range(4):
                 testBoard[k][l] = board[k][l]
-            '''testBoard = moveOptions[i](testBoard)
-            if testBoard != board:'''
         heur = (hodnoceni(testBoard))
         return(heur)
 
@@ -232,10 +224,9 @@ def firstCall(board):
             trialBoard[i][j] = board[i][j]
     trialBoard = up(trialBoard)
     if trialBoard != board:
-        current = expmax(trialBoard, 1, 5)
+        current = expmax(trialBoard, 1, 4)
     else:
         current = -float("inf")
-    print(current)
     if current > top:
         move = 0
         top = current
@@ -244,10 +235,9 @@ def firstCall(board):
             trialBoard[i][j] = board[i][j]
     trialBoard = right(trialBoard)
     if trialBoard != board:
-        current = expmax(trialBoard, 1, 5)
+        current = expmax(trialBoard, 1, 4)
     else:
         current = -float("inf")
-    print(current)
     if current > top:
         top = current
         move = 1
@@ -256,10 +246,9 @@ def firstCall(board):
             trialBoard[i][j] = board[i][j]
     trialBoard = down(trialBoard)
     if trialBoard != board:
-        current = expmax(trialBoard, 1, 5)
+        current = expmax(trialBoard, 1, 4)
     else:
         current = -float("inf")
-    print(current)
     if current > top:
         move = 2
         top = current
@@ -268,15 +257,13 @@ def firstCall(board):
             trialBoard[i][j] = board[i][j]
     trialBoard = left(trialBoard)
     if trialBoard != board:
-        current = expmax(trialBoard, 1, 5)
+        current = expmax(trialBoard, 1, 4)
     else:
         current = -float("inf")
-    print(current)
     if current > top:
         top = current
         move = 3
     if top != -float("inf"):
-        print(move)
         return(move)
     else:
         for n in range(4):
